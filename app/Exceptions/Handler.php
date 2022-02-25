@@ -38,4 +38,22 @@ class Handler extends ExceptionHandler
             //
         });
     }
+	
+	/**
+	 * @param Request $request
+	 * @param Throwable $e
+	 * @return JsonResponse|Response|\Symfony\Component\HttpFoundation\Response
+	 * @throws Throwable
+	 */
+	public function render($request, Throwable $e)
+	{
+		if ($request->is('api/*')) {
+			return response()->json([
+				'message' => 'Record not found.'
+			], 404);
+		}
+		
+		return parent::render($request, $e);
+	}
+ 
 }

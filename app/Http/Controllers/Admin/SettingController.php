@@ -116,6 +116,22 @@ class SettingController extends Controller
                 'value'=>'',
 
             ),
+	        array(
+		        'name'=>'auth_page_color',
+		        'id'=>'auth_page_color',
+		        'type'=>'text',
+		        'label'=>'Auth Page Background Color',
+		        'place_holder'=>'#ff6161',
+		        'class'=>'form-control form-control-solid demo',
+	        ),
+	        array(
+		        'name'=>'auth_heading_color',
+		        'id'=>'auth_heading_color',
+		        'type'=>'text',
+		        'label'=>'Auth Page Heading Color',
+		        'place_holder'=>'#ff6161',
+		        'class'=>'form-control form-control-solid demo',
+	        ),
 
             array(
                 'name'=>'copy_right',

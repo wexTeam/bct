@@ -2,31 +2,34 @@
 @section('content')
 	<?php
 	$setting = \App\Models\Setting::pluck('value','name')->toArray();
-	$auth_logo = isset($setting['auth_logo']) ? 'uploads/'.$setting['auth_logo'] : 'assets/media/logos/logo-light.png';
-	$auth_page_heading = isset($setting['auth_page_heading']) ? $setting['auth_page_heading'] : 'wwww.webexert.com';
+	$auth_logo = isset($setting['auth_logo']) ? 'uploads/'.$setting['auth_logo'] : 'assets/media/logos/logo-letter-1.png';
+	$auth_page_heading = isset($setting['auth_page_heading']) ? $setting['auth_page_heading'] : 'Discover Amazing Metronic <br> with great build tools';
 	$auth_image = isset($setting['auth_image']) ? 'uploads/'.$setting['auth_image'] : 'assets/media/svg/illustrations/login-visual-1.svg';
 	$copy_right = isset($setting['copy_right']) ? $setting['copy_right'] : 'wwww.webexert.com';
+	$site_title = isset($setting['site_title']) ? $setting['site_title'] : 'Metronic';
+	$auth_page_color = isset($setting['auth_page_color']) ? $setting['auth_page_color'] : '#F2C98A';
+	$auth_heading_color = isset($setting['auth_heading_color']) ? $setting['auth_heading_color'] : '#986923';
 	?>
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Login-->
 		<div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
 			<!--begin::Aside-->
-			<div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
+			<div class="login-aside d-flex flex-column flex-row-auto" style="background-color: {{ $auth_page_color }};">
 				<!--begin::Aside Top-->
 				<div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
 					<!--begin::Aside header-->
-					<a href="#" class="text-center mb-10">
+					<div href="#" class="text-center mb-10">
 						<img src="{{ asset($auth_logo) }}" class="max-h-70px" alt="" />
-					</a>
+					</div>
 					<!--end::Aside header-->
 					<!--begin::Aside title-->
-					<h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;"><?php echo stripcslashes($auth_page_heading )?></h3>
+					<h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: {{ $auth_heading_color }};"><?php echo stripcslashes($auth_page_heading )?></h3>
 					<!--end::Aside title-->
 				</div>
 				<!--end::Aside Top-->
 				<!--begin::Aside Bottom-->
 				<div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center"
-				     style="background-image: url({{ asset($auth_image) }})"></div>
+				     style="background-image: url('{{ asset($auth_image) }}')"></div>
 				<!--end::Aside Bottom-->
 			</div>
 			<!--begin::Aside-->
@@ -38,13 +41,13 @@
 					<div class="login-form login-signin">
 						<!--begin::Form-->
 						<form class="form" action="{{ route('login') }}" method="post" novalidate="novalidate" >
-							
+
 							@csrf
-							
+
 							<!--begin::Title-->
 							<div class="pb-13 pt-lg-0 pt-5">
 								<h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-									Welcome to NewsWatch Client Portal</h3>
+									Welcome to {{ $site_title }}</h3>
 								{{--<span class="text-muted font-weight-bold font-size-h4">New Here?
 									<a href="javascript:;" id="kt_login_signup" class="text-primary font-weight-bolder">Create an Account</a></span>--}}
 								@if (Session::has('error'))
@@ -54,9 +57,9 @@
 							<!--begin::Title-->
 							<!--begin::Form group-->
 							<div class="form-group">
-								
+
 								<label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-								<input class="@error('email') is-invalid @enderror form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="email" name="email" value="{{ old('email') }}" autocomplete="off" />
+								<input class="@error('email') is-invalid @enderror form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="email" name="email" value="{{ old('email') }}" autocomplete="off" onfocus="this.removeAttribute('readonly');" readonly  />
 								@error('email')<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
 							</div>
 							<!--end::Form group-->
@@ -72,7 +75,7 @@
 							<!--end::Form group-->
 							<!--begin::Action-->
 							<div class="pb-lg-0 pb-5">
-								<button type="submit"  class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+								<button type="submit" id="kt_btn" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
 								{{--<button type="button" class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg">
 									<span class="svg-icon svg-icon-md">
 										<!--begin::Svg Icon | path:assets/media/svg/social-icons/google.svg-->
@@ -170,12 +173,8 @@
 				<!--begin::Content footer-->
 				<div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
 					<div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
-						<span class="mr-1">{{ date('Y') }}©</span>
-						<a href="https://newswatchtv.com" target="_blank" class="text-dark-75 text-hover-primary">{{ $copy_right }}</a>
+						<span class="mr-1">{{ date('Y') }}© {{ $copy_right }}</span>
 					</div>
-					<a href="https://newswatchtv.com/reviews/" target="_blank" class="text-primary font-weight-bolder font-size-lg">Reviews</a>
-					<a href="https://newswatchtv.com/about-us/" target="_blank" class="text-primary ml-5 font-weight-bolder font-size-lg">About</a>
-					<a href="https://newswatchtv.com/contact-us/" target="_blank" class="text-primary ml-5 font-weight-bolder font-size-lg">Contact</a>
 				</div>
 				<!--end::Content footer-->
 			</div>

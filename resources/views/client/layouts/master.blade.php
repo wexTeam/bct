@@ -28,7 +28,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--end::Head-->
 
 <!--begin::Body-->
-<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
 @include('client.partials._page-loader')
 @include('client.layouts.layout')

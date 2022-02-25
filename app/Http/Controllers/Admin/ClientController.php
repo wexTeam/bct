@@ -36,6 +36,9 @@ class ClientController extends Controller
 			5 => 'action'
 		);
 		
+		
+		
+		
 		$totalData = User::where('is_admin',0)->count();
 		$limit = $request->input('length');
 		$start = $request->input('start');

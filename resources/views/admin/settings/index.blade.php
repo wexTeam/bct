@@ -23,7 +23,7 @@
 					<!--end::Page Heading-->
 				</div>
 				<!--end::Info-->
-				
+
 			</div>
 		</div>
 		<!--end::Subheader-->
@@ -38,25 +38,25 @@
 							<h3 class="card-label">Website CMS Form
 								<i class="mr-2"></i>
 								<small class="">try to scroll the page</small></h3>
-							
+
 						</div>
 						<div class="card-toolbar">
-							
+
 							<a href="{{ route('admin.dashboard') }}" class="btn btn-light-primary font-weight-bolder mr-2">
 								<i class="ki ki-long-arrow-back icon-sm"></i>Back</a>
-							
+
 							<div class="btn-group">
 								<a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('setting_form').submit();" id="kt_btn" class="btn btn-primary font-weight-bolder">
 									<i class="ki ki-check icon-sm"></i>Save</a>
-							
-								
-								
+
+
+
 							</div>
 						</div>
 					</div>
 					<div class="card-body">
 					@include('admin.partials._messages')
-						<!--begin::Form-->
+					<!--begin::Form-->
 						<form class="form" id="setting_form" method="POST" action="{{ route('setting.store') }}" enctype='multipart/form-data'>
 							@csrf
 							<div class="row">
@@ -65,79 +65,91 @@
 									<div class="my-5">
 										<h3 class="text-dark font-weight-bold mb-10">Change Setting:</h3>
 										@foreach($all_columns as $column)
-											
+
 											@if($column['type']=="text")
-													<div class="form-group row">
-														<label class="col-3">{{$column['label']}}</label>
-														<div class="col-9">
-															<input class="{{$column['class']}}" type="text" name="{{$column['name']}}" placeholder="{{$column['place_holder']}}" value="{{ isset($settings[$column['name']]) ? $settings[$column['name']] : ''}}" >
-														</div>
+												<div class="form-group row">
+													<label class="col-3">{{$column['label']}}</label>
+													<div class="col-9">
+														<input class="{{$column['class']}}" type="text" name="{{$column['name']}}" placeholder="{{$column['place_holder']}}" value="{{ isset($settings[$column['name']]) ? $settings[$column['name']] : ''}}" >
 													</div>
-												@endif
-										
-												@if($column['type']=="hidden")
-													<input type="hidden" name="{{$column['name']}}" value="{{ isset
+												</div>
+											@endif
+
+											@if($column['type']=="hidden")
+												<input type="hidden" name="{{$column['name']}}" value="{{ isset
 	                        ($settings[$column['name']]) ? $settings[$column['name']]: ''}}">
-												@endif
-												
-												@if($column['type']=="file")
-													<div class="form-group row">
-														<label class="col-3">{{$column['label']}}</label>
-                              <?php
-                              if(isset($settings[$column['name']])){
-                                  $settings[$column['name']] = $settings[$column['name']];
-                              }else {
-                                  $settings[$column['name']]='abc.png';
-                              }
-                              ?>
-														<div class="col-9">
-															<div class="custom-file">
+											@endif
+
+											@if($column['type']=="file")
+												<div class="form-group row">
+													<label class="col-3">{{$column['label']}}</label>
+													<?php
+													if(isset($settings[$column['name']])){
+														$settings[$column['name']] = $settings[$column['name']];
+													}else {
+														$settings[$column['name']]='abc.png';
+													}
+													?>
+													<div class="col-9">
+														<div class="custom-file">
 															<input type="file" name="{{$column['name']}}" class="{{$column['class']}}" id="{{$column['id']}}">
-																<label class="custom-file-label" for="customFile">Choose file</label>
+															<label class="custom-file-label" for="customFile">Choose file</label>
 															@if(File::exists('uploads/'.$settings[$column['name']]))
 																<img src="{{asset('uploads/'.$settings[$column['name']])}}" style="{{$column['style']}}" alt="{{$column['name']}} is not found" />
 															@else
 																<img src="{{asset('uploads/img.png')}}" style="{{$column['style']}}" alt="{{$column['name']}} is not found"/>
 															@endif
-															
-															</div>
+
 														</div>
 													</div>
-												@endif
-												@if($column['type']=="textarea")
-													<div class="form-group row">
-														<label class="col-3">{{$column['label']}}</label>
-														<div class="col-9">
+												</div>
+											@endif
+											@if($column['type']=="textarea")
+												<div class="form-group row">
+													<label class="col-3">{{$column['label']}}</label>
+													<div class="col-9">
 														<textarea name="{{$column['name']}}" class="{{$column['class']}}"
-														          rows="{{isset($column['rows'] )? $column['rows'] :'2'}}"
-														          placeholder="{{$column['place_holder']}}"
-														          id="{{$column['id']}}">{{ isset($settings[$column['name']]) ? $settings[$column['name']] : ''}}
+																			rows="{{isset($column['rows'] )? $column['rows'] :'2'}}"
+																			placeholder="{{$column['place_holder']}}"
+																			id="{{$column['id']}}">{{ isset($settings[$column['name']]) ? $settings[$column['name']] : ''}}
 														</textarea>
-														</div>
 													</div>
-												@endif
-												@if($column['type']=="checkbox")
-													<div class="form-group row">
-														<label class="col-3 col-form-label">{{$column['label']}}</label>
-														<div class="col-9">
+												</div>
+											@endif
+											@if($column['type']=="checkbox")
+												<?php
+												if(isset($settings[$column['name']]) && $settings[$column['name']] ==1){
+
+													$checked = "checked='checked'";
+												}else{
+													$checked = '';
+												}
+
+												?>
+												<div class="form-group row">
+													<label class="col-3 col-form-label">{{$column['label']}}</label>
+													<div class="col-9">
 															 <span class="switch switch-outline switch-icon switch-success">
-																<input name="{{$column['name']}}"
-																       class="{{$column['class']}}"
-														           type="checkbox"
-														           id="{{$column['id']}}"
-																       value="{{$column['value']}}"
-																><span></span>
+																<label><input name="{{$column['name']}}"
+																							class="{{$column['class']}}"
+																							type="checkbox"
+																							id="{{$column['id']}}"
+																							value="{{$column['value']}}"
+																				{{ $checked }}
+																			><span></span>
 																 </label>
                               </span>
-																
-														</div>
+
 													</div>
-												@endif
-											
+												</div>
+
+											@endif
+
 										@endforeach
 									</div>
+
 									<div class="separator separator-dashed my-10"></div>
-								
+
 								</div>
 								<div class="col-xl-2"></div>
 							</div>
@@ -146,11 +158,53 @@
 					</div>
 				</div>
 				<!--end::Card-->
-				
+
 			</div>
 			<!--end::Container-->
 		</div>
 		<!--end::Entry-->
 	</div>
 @endsection
+@section('stylesheets')
+	<link rel="stylesheet" href="{{ asset('assets/css/jquery.minicolors.css') }}">
+@endsection
+@section('scripts')
+	<script src="{{ asset('assets/js/jquery.minicolors.js') }}"></script>
+	<script>
+		$(document).ready( function() {
 
+			$('.demo').each( function() {
+				//
+				// Dear reader, it's actually very easy to initialize MiniColors. For example:
+				//
+				//  $(selector).minicolors();
+				//
+				// The way I've done it below is just for the demo, so don't get confused
+				// by it. Also, data- attributes aren't supported at this time...they're
+				// only used for this demo.
+				//
+				$(this).minicolors({
+					control: $(this).attr('data-control') || 'hue',
+					defaultValue: $(this).attr('data-defaultValue') || '',
+					format: $(this).attr('data-format') || 'hex',
+					keywords: $(this).attr('data-keywords') || '',
+					inline: $(this).attr('data-inline') === 'true',
+					letterCase: $(this).attr('data-letterCase') || 'lowercase',
+					opacity: $(this).attr('data-opacity'),
+					position: $(this).attr('data-position') || 'bottom',
+					swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+					change: function(value, opacity) {
+						if( !value ) return;
+						if( opacity ) value += ', ' + opacity;
+						if( typeof console === 'object' ) {
+							console.log(value);
+						}
+					},
+					theme: 'bootstrap'
+				});
+
+			});
+
+		});
+	</script>
+@endsection

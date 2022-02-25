@@ -16,41 +16,48 @@ var KTWizard1 = function () {
 			_formEl,
 			{
 				fields: {
-					address1: {
+					company_name: {
 						validators: {
 							notEmpty: {
-								message: 'Address is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					postcode: {
+					featured_product: {
 						validators: {
 							notEmpty: {
-								message: 'Postcode is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					city: {
+					main_contact: {
 						validators: {
 							notEmpty: {
-								message: 'City is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					state: {
+					shipping_product: {
 						validators: {
 							notEmpty: {
-								message: 'State is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					country: {
+					logo: {
 						validators: {
 							notEmpty: {
-								message: 'Country is required'
+								message: 'This field is required'
 							}
 						}
-					}
+					},
+					assets_outside_logo: {
+						validators: {
+							notEmpty: {
+								message: 'This field is required'
+							}
+						}
+					},
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -68,53 +75,48 @@ var KTWizard1 = function () {
 			_formEl,
 			{
 				fields: {
-					package: {
+					company_overview: {
 						validators: {
 							notEmpty: {
-								message: 'Package details is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					weight: {
+					about_product: {
 						validators: {
 							notEmpty: {
-								message: 'Package weight is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
+								message: 'This field is required'
 							}
 						}
 					},
-					width: {
+					company_uniqueness: {
 						validators: {
 							notEmpty: {
-								message: 'Package width is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
+								message: 'This field is required'
 							}
 						}
 					},
-					height: {
+					competitive_advantages: {
 						validators: {
 							notEmpty: {
-								message: 'Package height is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
+								message: 'This field is required'
 							}
 						}
 					},
-					packagelength: {
+					script_key_points: {
 						validators: {
 							notEmpty: {
-								message: 'Package length is required'
-							},
-							digits: {
-								message: 'The value added is not valid'
+								message: 'This field is required'
 							}
 						}
-					}
+					},
+					redirect_url: {
+						validators: {
+							notEmpty: {
+								message: 'This field is required'
+							}
+						}
+					},
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -132,27 +134,42 @@ var KTWizard1 = function () {
 			_formEl,
 			{
 				fields: {
-					delivery: {
+					video_style: {
 						validators: {
 							notEmpty: {
-								message: 'Delivery type is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					packaging: {
+					specifical_filming_notes: {
 						validators: {
 							notEmpty: {
-								message: 'Packaging type is required'
+								message: 'This field is required'
 							}
 						}
 					},
-					preferreddelivery: {
+					anything_special: {
 						validators: {
 							notEmpty: {
-								message: 'Preferred delivery window is required'
+								message: 'This field is required'
 							}
 						}
-					}
+					},
+					prior_airdate: {
+						validators: {
+							notEmpty: {
+								message: 'This field is required'
+							}
+						}
+					},
+					producer_question: {
+						validators: {
+							notEmpty: {
+								message: 'This field is required'
+							}
+						}
+					},
+
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -165,57 +182,7 @@ var KTWizard1 = function () {
 			}
 		));
 
-		// Step 4
-		_validations.push(FormValidation.formValidation(
-			_formEl,
-			{
-				fields: {
-					locaddress1: {
-						validators: {
-							notEmpty: {
-								message: 'Address is required'
-							}
-						}
-					},
-					locpostcode: {
-						validators: {
-							notEmpty: {
-								message: 'Postcode is required'
-							}
-						}
-					},
-					loccity: {
-						validators: {
-							notEmpty: {
-								message: 'City is required'
-							}
-						}
-					},
-					locstate: {
-						validators: {
-							notEmpty: {
-								message: 'State is required'
-							}
-						}
-					},
-					loccountry: {
-						validators: {
-							notEmpty: {
-								message: 'Country is required'
-							}
-						}
-					}
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					// Bootstrap Framework Integration
-					bootstrap: new FormValidation.plugins.Bootstrap({
-						//eleInvalidClass: '',
-						eleValidClass: '',
-					})
-				}
-			}
-		));
+
 	}
 
 	var _initWizard = function () {

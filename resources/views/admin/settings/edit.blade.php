@@ -73,7 +73,7 @@
                     <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}">
                       <label class="col-3">Name</label>
                       <div class="col-9">
-                        {{ Form::text('name', null, ['class' => 'form-control form-control-solid','id'=>'name','placeholder'=>'Enter Name','required'=>'true']) }}
+                        {{ Form::text('first_name', null, ['class' => 'form-control form-control-solid','id'=>'name','placeholder'=>'Enter Name','required'=>'true']) }}
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                       </div>
                     </div>
