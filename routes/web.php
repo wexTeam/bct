@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('front-end.index');
 });
 Route::get('/clear',function(){
     Artisan::call('config:clear');
